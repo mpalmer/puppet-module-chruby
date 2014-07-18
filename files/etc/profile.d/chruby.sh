@@ -6,4 +6,5 @@
 
 source /usr/local/share/chruby/chruby.sh
 
-export RUBIES=(/usr/local/lib/rubies/*)
+RUBIES=(/usr/local/lib/rubies/*)
+export RUBIES
