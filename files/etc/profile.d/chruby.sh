@@ -6,5 +6,5 @@
 
 source /usr/local/share/chruby/chruby.sh
 
-RUBIES=(find /usr/local/lib/rubies -maxdepth 1 -mindepth 1 -type d -print)
+RUBIES=($(find /usr/local/lib/rubies -maxdepth 1 -mindepth 1 -type d -print))
 export RUBIES
