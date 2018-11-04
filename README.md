@@ -1,6 +1,6 @@
 # chruby
 
-[![Build Status](https://travis-ci.org/postmodern/chruby.png)](https://travis-ci.org/postmodern/chruby)
+[![Build Status](https://travis-ci.org/postmodern/chruby.svg?branch=master)](https://travis-ci.org/postmodern/chruby)
 
 Changes the current Ruby.
 
@@ -19,7 +19,7 @@ Changes the current Ruby.
 * Defaults to the system Ruby.
 * Optionally supports auto-switching and the `.ruby-version` file.
 * Supports [bash] and [zsh].
-* Small (~90 LOC).
+* Small (~100 LOC).
 * Has tests.
 
 ## Anti-Features
@@ -30,11 +30,15 @@ Changes the current Ruby.
 * Does not automatically switch Rubies by default.
 * Does not require write-access to the Ruby directory in order to install gems.
 
+## Requirements
+
+* [bash] >= 3 or [zsh]
+
 ## Install
 
-    wget -O chruby-0.3.8.tar.gz https://github.com/postmodern/chruby/archive/v0.3.8.tar.gz
-    tar -xzvf chruby-0.3.8.tar.gz
-    cd chruby-0.3.8/
+    wget -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz
+    tar -xzvf chruby-0.3.9.tar.gz
+    cd chruby-0.3.9/
     sudo make install
 
 ### PGP
@@ -43,14 +47,13 @@ All releases are [PGP] signed for security. Instructions on how to import my
 PGP key can be found on my [blog][1]. To verify that a release was not tampered 
 with:
 
-    wget https://raw.github.com/postmodern/chruby/master/pkg/chruby-0.3.8.tar.gz.asc
-    gpg --verify chruby-0.3.8.tar.gz.asc chruby-0.3.8.tar.gz
+    wget https://raw.github.com/postmodern/chruby/master/pkg/chruby-0.3.9.tar.gz.asc
+    gpg --verify chruby-0.3.9.tar.gz.asc chruby-0.3.9.tar.gz
 
 ### setup.sh
 
-chruby also includes a `setup.sh` script, which installs chruby and the latest
-releases of [Ruby], [JRuby] and [Rubinius]. Simply run the script as root or 
-via `sudo`:
+chruby also includes a `setup.sh` script, which installs chruby. Simply run the 
+script as root or via `sudo`:
 
     sudo ./scripts/setup.sh
 
@@ -69,6 +72,10 @@ Or the absolute latest chruby can be installed from source:
 chruby is already included in the [AUR]:
 
     yaourt -S chruby
+
+### Fedora Linux
+
+chruby is available as an rpm on [Fedora Copr](https://copr.fedorainfracloud.org/coprs/postmodern/chruby/).
     
 ### FreeBSD
 
@@ -117,6 +124,8 @@ Add the following to the `~/.bashrc` or `~/.zshrc` file:
 source /usr/local/share/chruby/chruby.sh
 ```
 
+*Note:* OSX does not automatically execute `~/.bashrc`, instead try adding to `/etc/bashrc`.
+
 ### System Wide
 
 If you wish to enable chruby system-wide, add the following to
@@ -144,7 +153,7 @@ the `RUBIES` variable:
 ``` bash
 source /usr/local/share/chruby/chruby.sh
 
-RUBIES=(
+RUBIES+=(
   /opt/jruby-1.7.0
   "$HOME/src/rubinius"
 )
@@ -183,6 +192,8 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 ```
 
+*Note:* OSX does not automatically execute `~/.bashrc`, instead try adding to `/etc/bashrc`.
+
 chruby will check the current and parent directories for a [.ruby-version]
 file. Other Ruby switchers also understand this file:
 https://gist.github.com/1912050
@@ -193,8 +204,9 @@ your project's Gemfile, try
 
 ### Default Ruby
 
-If you wish to set a default Ruby, simply call `chruby` in `~/.bash_profile` or
-`~/.zprofile`:
+Once you have loaded `chruby.sh` and/or `auto.sh` in your shell configuration,
+you can also set a default Ruby. Simply call the `chruby` function in
+`~/.bash_profile` or `~/.zprofile`:
 
     chruby ruby-1.9
 
@@ -218,7 +230,7 @@ short option `-E`).  This parameter can also be added to your gemrc file.
 For instructions on using chruby with other tools, please see the [wiki]:
 
 * [Capistrano](https://github.com/capistrano/chruby#readme)
-* [Chef](https://github.com/Atalanta/chef-chruby#readme)
+* [Chef](https://supermarket.getchef.com/cookbooks/chruby_install)
 * [Cron](https://github.com/postmodern/chruby/wiki/Cron)
 * [Emacs](https://github.com/arnebrasseur/chruby.el#readme)
 * [Pow](https://github.com/postmodern/chruby/wiki/Pow)
@@ -290,9 +302,9 @@ Switch to an arbitrary Ruby on the fly:
 
 ## Uninstall
 
-After removing the chruby configuration:
-
-    $ sudo make uninstall
+1. Remove or comment out chruby from your shell configuration.
+2. Restart your shell (ex: `exec $SHELL`).
+3. `sudo make uninstall`
 
 ## Alternatives
 
