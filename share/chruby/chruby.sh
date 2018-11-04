@@ -45,7 +45,7 @@ function chruby_use()
 
 	eval "$(RUBYGEMS=GEMDEPS="" "$RUBY_ROOT/bin/ruby" - <<EOF
 begin; require 'rbconfig'; rescue LoadError; end
-puts "export RUBY_ENGINE=#{Object.const_defined?(RUBY_ENGINE) ? RUBY_ENGINE : 'ruby'};"
+puts "export RUBY_ENGINE=#{Object.const_defined?(:RUBY_ENGINE) ? RUBY_ENGINE : 'ruby'};"
 puts "export RUBY_VERSION=#{RUBY_VERSION};"
 puts "export RUBY_API_VERSION=#{RbConfig::CONFIG["ruby_version"] rescue RUBY_VERSION}"
 begin; require 'rubygems'; puts "export GEM_ROOT=#{Gem.default_dir.inspect};"; rescue LoadError; end
